@@ -9,9 +9,9 @@ $tool.get('https://dict.youdao.com/infoline/style/cardList?mode=publish&client=m
     let obj = JSON.parse(data);
     let date = new Date();
     let isAM = date.getHours() < 12 ? true : false;
-    let title = '打卡啦' + (isAM ? ' -' : ' out') + (isAM ? ' 🍎' : ' 🍉');
+    let title = '打卡啦' + (isAM ? ' ' : ' out') + (isAM ? ' ' : ' ');
     let subtitle = '';
-    let scheme = 'dingtalk://dingtalkclient/page/link?url=https://swform.dingtalk.com/index.htm#/queWrite/ding7fd32f4be98e8e36a39a90f97fcb1e09/PROC-2C154DFA-544F-475C-919F-2F9F7E20FEE6/33c59612dc66d9835a1f68c2ffd70e62?bizType=0';
+    let scheme = 'dingtalk://dingtalkclient/page/link?url=https://swform.dingtalk.com/index.htm#/queWrite/ding7fd32f4be98e8e36a39a90f97fcb1e09/PROC-2C154DFA-544F-475C-919F-2F9F7E20FEE6/33c59612dc66d9835a1f68c2ffd70e62?bizType=0&writeSource=3&source=mobile_ding&loopDate=1660951800000';
     let option = {"open-url" : scheme};
     if (!error) {
         if (obj && obj.length > 1) {
