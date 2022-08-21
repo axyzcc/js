@@ -11,7 +11,7 @@ $tool.get('https://dict.youdao.com/infoline/style/cardList?mode=publish&client=m
     let isAM = date.getHours() < 12 ? true : false;
     let title = '打卡啦' + (isAM ? '   ' : ' out') + (isAM ? ' ' : ' ');
     let subtitle = '';
-dingtalk://dingtalkclient/page/link?url=https%3A%2F%2Fswform.dingtalk.com%2Findex.htm%3FcorpId%3Dding07953c7edbc74755f5bf40eda33b7ba0%26formCode%3DPROC-082AF3D4-B82F-410D-9EF5-2F6D142AEF04%26bizType%3D0%23%2FqueWrite%2Fding07953c7edbc74755f5bf40eda33b7ba0%2FPROC-082AF3D4-B82F-410D-9EF5-2F6D142AEF04%2F01018634ebf2763d8fcd89f9993a9e54%3FbizType%3D0%26source%3Dlink&web_wnd=general&width=960&height=640';
+    let scheme ='dingtalk://dingtalkclient/page/link?url=https%3A%2F%2Fswform.dingtalk.com%2Findex.htm%3FcorpId%3Dding07953c7edbc74755f5bf40eda33b7ba0%26formCode%3DPROC-082AF3D4-B82F-410D-9EF5-2F6D142AEF04%26bizType%3D0%23%2FqueWrite%2Fding07953c7edbc74755f5bf40eda33b7ba0%2FPROC-082AF3D4-B82F-410D-9EF5-2F6D142AEF04%2F01018634ebf2763d8fcd89f9993a9e54%3FbizType%3D0%26source%3Dlink&web_wnd=general&width=960&height=640';
     let option = {"open-url" : scheme};
     if (!error) {
         if (obj && obj.length > 1) {
