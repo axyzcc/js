@@ -11,7 +11,7 @@ $tool.get('https://dict.youdao.com/infoline/style/cardList?mode=publish&client=m
     让 isAM = date.getHours() < 12 ？真假;
     let title = '打卡啦' + (isAM ? '  ' : ' ') + (isAM ? ' ' : ' ');
     让副标题 = '';
-    let scheme ='wxfe4e96ab1204f121://url=https//td.cgmcare.cn/api/medicine_record/getMedicineRecordInfo'；
+    let scheme ='wxfe4e96ab1204f121://url=https://td.cgmcare.cn/api/medicine_record/getMedicineRecordInfo'；
     让选项= {“开放网址”：方案}；
     如果（！错误）{
         if (obj && obj.length > 1) {
