@@ -1,44 +1,44 @@
 
 /*
-自述文件：https://github.com/axyzcc/js
-每日打卡提醒（corn "0 8 * * *" 周一到每日早八）+ 壹句（有道词典）+ 跳转钉钉打卡页面
+README：https://github.com/axyzcc/js
+每日打卡提醒（corn "0 8 * * *" 周一到周日，早八）+ 每日壹句（有道词典）+ 跳转钉钉打卡页面
 */
 
-常量 $tool = 新工具（）
+const $tool = new Tool()
 $tool.get('https://dict.youdao.com/infoline/style/cardList?mode=publish&client=mobile&style=daily&size=2', function (error, response, data) {
-    让 obj = JSON.parse(data);
-    让日期 = 新日期（）；
-    让 isAM = date.getHours() < 12 ？真假;
-    let title = '打卡啦' + (isAM ? '  ' : ' ') + (isAM ? ' ' : ' ');
-    让副标题 = '';
-    let scheme ='wxfe4e96ab1204f121://url=https://td.cgmcare.cn/api/medicine_record/getMedicineRecordInfo'；
-    让选项= {“开放网址”：方案}；
-    如果（！错误）{
+    let obj = JSON.parse(data);
+    let date = new Date();
+    let isAM = date.getHours() < 12 ? true : false;
+    let title = '打卡啦' + (isAM ? ' ' : ' ') + (isAM ? ' ' : ' ');
+    let subtitle = '';
+    let scheme ='wxfe4e96ab1204f121://url=https://td.cgmcare.cn/api/medicine_record/getMedicineRecordInfo';
+    let option = {"open-url" : scheme};
+    if (!error) {
         if (obj && obj.length > 1) {
-            让 yi = obj[1];
-            内容 = yi.title + '\n' + yi.summary;
+            let yi = obj[1];
+            content = yi.title + '\n' + yi.summary;
             option["media-url"] = yi.image[0];
         }
     }
-    $tool.notify(标题、副标题、内容、选项);
-    $完成();
+    $tool.notify(title, subtitle, content, option);
+    $done();
 })
 
-功能工具（）{
+function Tool() {
     _node = (() => {
         if (typeof require == "function") {
-            常量请求 = 要求（'请求'）
-            返回（{请求}）
-        } 别的 {
-            返回（空）
+            const request = require('request')
+            return ({ request })
+        } else {
+            return (null)
         }
     })()
-    _isLoon = typeof $loon !== "未定义";
-    _isSurge = typeof $httpClient != "未定义" && !_isLoon;
-    _isQuanX = typeof $task != "未定义"
+    _isLoon = typeof $loon !== "undefined";
+    _isSurge = typeof $httpClient != "undefined" && !_isLoon;
+    _isQuanX = typeof $task != "undefined"
     this.isSurge = _isSurge
     this.isQuanX = _isQuanX
-    this.isResponse = typeof $response != "未定义"
+    this.isResponse = typeof $response != "undefined"
     this.notify = (title, subtitle, message, option) => {
         if (_isQuanX) $notify(title, subtitle, message, option)
         if (_isSurge) $notification.post(title, subtitle, message, {"url":option["open-url"]})
@@ -53,32 +53,32 @@ $tool.get('https://dict.youdao.com/infoline/style/cardList?mode=publish&client=m
         if (_isQuanX) return $prefs.valueForKey(key)
         if (_isSurge) return $persistentStore.read(key)
     }
-    this.get =（选项，回调）=> {
-        如果（_isQuanX）{
+    this.get = (options, callback) => {
+        if (_isQuanX) {
             if (typeof options == "string") options = { url: options }
-            选项[“方法”] = “获取”
+            options["method"] = "GET"
             $task.fetch(options).then(response => { callback(null, _status(response), response.body) }, reason => callback(reason.error, null, null))
         }
         if (_isSurge) $httpClient.get(options, (error, response, body) => { callback(error, _status(response), body) })
         if (_node) _node.request(options, (error, response, body) => { callback(error, _status(response), body) })
     }
-    this.post =（选项，回调）=> {
-        如果（_isQuanX）{
+    this.post = (options, callback) => {
+        if (_isQuanX) {
             if (typeof options == "string") options = { url: options }
-            选项[“方法”] =“发布”
+            options["method"] = "POST"
             $task.fetch(options).then(response => { callback(null, _status(response), response.body) }, reason => callback(reason.error, null, null))
         }
         if (_isSurge) $httpClient.post(options, (error, response, body) => { callback(error, _status(response), body) })
         if (_node) _node.request.post(options, (error, response, body) => { callback(error, _status(response), body) })
     }
-    _status =（响应）=> {
-        如果（响应）{
-            如果（响应状态）{
+    _status = (response) => {
+        if (response) {
+            if (response.status) {
                 response["statusCode"] = response.status
             } else if (response.statusCode) {
-                响应[“状态”] = response.statusCode
+                response["status"] = response.statusCode
             }
         }
-        返回响应
+        return response
     }
 }
