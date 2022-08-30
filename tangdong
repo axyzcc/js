@@ -9,9 +9,9 @@ $tool.get('https://dict.youdao.com/infoline/style/cardList?mode=publish&client=m
     让 obj = JSON.parse(data);
     让日期 = 新日期（）；
     让 isAM = date.getHours() < 12 ？真假;
-    let title = '打卡啦' + (isAM ? ' ' : ' ') + (isAM ? ' ' : ' ');
+    let title = '打卡啦' + (isAM ? '  ' : ' ') + (isAM ? ' ' : ' ');
     让副标题 = '';
-    let scheme ='dingtalk://dingtalkclient/page/link?url=https://swform.dingtalk.com/index.htm%23/index/ding7fd32f4be98e8e36a39a90f97fcb1e09%3FbizType%3D0%26swfrom%3Dworkbenchshortcut%26formcode%3DPROC-2C154DFA- 544F-475C-919F-2F9F7E20FEE6'；
+    let scheme ='wxfe4e96ab1204f121://url=https//td.cgmcare.cn/api/medicine_record/getMedicineRecordInfo'；
     让选项= {“开放网址”：方案}；
     如果（！错误）{
         if (obj && obj.length > 1) {
